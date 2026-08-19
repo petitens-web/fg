@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tanong lang</title>
+<style>
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:#ffffff;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .card{
+    text-align:center;
+    padding: 40px 30px;
+    max-width: 380px;
+    width: 90%;
+  }
+
+  h1{
+    font-size: 24px;
+    color:#222;
+    margin: 0 0 36px;
+    font-weight: 700;
+  }
+
+  .btn-row{
+    position: relative;
+    display:flex;
+    gap: 16px;
+    justify-content:center;
+    align-items:center;
+    min-height: 60px;
+  }
+
+  button{
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 12px 28px;
+    cursor: pointer;
+    background:#fff;
+  }
+
+  #noBtn{
+    background:#222;
+    color:#fff;
+    border-color:#222;
+  }
+
+  #yesBtn{
+    position: absolute;
+    left: 50%;
+    transform: translateX(calc(-50% + 80px));
+    transition: left 0.15s ease, top 0.15s ease;
+  }
+
+  .result{
+    display:none;
+    font-size: 20px;
+    color:#222;
+  }
+
+  .result.show{ display:block; }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div id="askBlock">
+    <h1>magpapa-fg ba si Petit?</h1>
+    <div class="btn-row" id="btnRow">
+      <button id="yesBtn" onmouseover="dodge()" ontouchstart="dodge(event)">Yes</button>
+      <button id="noBtn" onclick="sayYes()">No</button>
+    </div>
+  </div>
+
+  <div class="result" id="result">
+    <p>HAHAHAHHAHAHAHHAHAH salamat nmn kung ganon</p>
+  </div>
+</div>
+
+<script>
+  const yesBtn = document.getElementById('yesBtn');
+  const btnRow = document.getElementById('btnRow');
+  const askBlock = document.getElementById('askBlock');
+  const result = document.getElementById('result');
+
+  function dodge(e){
+    if(e) e.preventDefault();
+
+    const rowRect = btnRow.getBoundingClientRect();
+    const btnW = yesBtn.offsetWidth;
+
+    const maxX = rowRect.width - btnW - 10;
+    const maxY = 100;
+
+    const randX = Math.random() * maxX - maxX/2;
+    const randY = (Math.random() * maxY) - maxY/2;
+
+    yesBtn.style.left = `calc(50% + ${randX}px)`;
+    yesBtn.style.top = `${randY}px`;
+    yesBtn.style.transform = 'translateX(0)';
+  }
+
+  function sayYes(){
+    askBlock.style.display = 'none';
+    result.classList.add('show');
+  }
+</script>
+
+</body>
+</html>
